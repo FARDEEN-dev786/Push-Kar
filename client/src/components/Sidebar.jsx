@@ -1,3 +1,5 @@
+
+import { NavLink } from "react-router-dom";
 import {
   LayoutDashboard,
   CheckSquare,
@@ -7,11 +9,31 @@ import {
 } from "lucide-react";
 
 const menuItems = [
-  { icon: <LayoutDashboard size={20} />, label: "Dashboard" },
-  { icon: <CheckSquare size={20} />, label: "Daily Check-in" },
-  { icon: <BarChart3 size={20} />, label: "Analytics" },
-  { icon: <Target size={20} />, label: "Goals" },
-  { icon: <Settings size={20} />, label: "Settings" },
+  {
+    icon: <LayoutDashboard size={20} />,
+    label: "Dashboard",
+    path: "/",
+  },
+  {
+    icon: <CheckSquare size={20} />,
+    label: "Daily Check-In",
+    path: "/checkin",
+  },
+  {
+    icon: <BarChart3 size={20} />,
+    label: "Analytics",
+    path: "/analytics",
+  },
+  {
+    icon: <Target size={20} />,
+    label: "Goals",
+    path: "/goals",
+  },
+  {
+    icon: <Settings size={20} />,
+    label: "Settings",
+    path: "/settings",
+  },
 ];
 
 function Sidebar() {
@@ -27,13 +49,19 @@ function Sidebar() {
 
       <nav className="mt-10 space-y-3">
         {menuItems.map((item) => (
-          <button
+          <NavLink
             key={item.label}
-            className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-slate-700 transition"
+            to={item.path}
+            className={({ isActive }) =>
+              `flex items-center gap-3 w-full p-3 rounded-xl transition ${isActive
+                ? "bg-cyan-500 text-white"
+                : "hover:bg-slate-700"
+              }`
+            }
           >
             {item.icon}
             {item.label}
-          </button>
+          </NavLink>
         ))}
       </nav>
     </aside>
