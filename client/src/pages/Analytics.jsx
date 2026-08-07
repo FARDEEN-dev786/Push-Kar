@@ -1,7 +1,9 @@
 import { getPerformanceHistory } from "../utils/historyStorage";
+import { calculateStreak } from "../utils/streakCalculator";
 
 function Analytics() {
   const history = getPerformanceHistory();
+  const streak = calculateStreak(history);
 
   if (history.length === 0) {
     return (
@@ -85,6 +87,15 @@ function Analytics() {
         <Stat
           title="Average Mood"
           value={`${averageMood}/10`}
+        />
+        <Stat
+          title="Current Streak"
+          value={`${streak.current} Days 🔥`}
+        />
+
+        <Stat
+          title="Longest Streak"
+          value={`${streak.longest} Days 🏆`}
         />
 
       </div>
