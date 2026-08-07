@@ -35,10 +35,18 @@ function CheckIn() {
             Number(formData.energy) * 2 +
             (formData.exercise ? 15 : 0);
 
-        setPerformanceData({
-            ...formData,
-            score,
-        });
+        const updatedData = {
+  ...formData,
+  score,
+};
+
+setPerformanceData(updatedData);
+
+// Save to localStorage
+localStorage.setItem(
+  "performanceData",
+  JSON.stringify(updatedData)
+);
 
         alert("Check-In Saved! 🎉");
     };
