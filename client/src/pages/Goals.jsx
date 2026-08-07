@@ -16,26 +16,19 @@ function Goals() {
   }, [goals]);
 
   const addGoal = () => {
-
     if (!target) return;
 
     setGoals([
       ...goals,
-
       {
         id: Date.now(),
-
         type: goalType,
-
         target: Number(target),
-
-        completed: false
-      }
-
+        completed: false,
+      },
     ]);
 
     setTarget("");
-
   };
 
   const toggleGoal = (id) => {
@@ -109,7 +102,7 @@ function Goals() {
                     : ""
                 }
               >
-                {goal.text}
+                {goal.type.charAt(0).toUpperCase() + goal.type.slice(1)} : {goal.target}
               </span>
             </div>
 
