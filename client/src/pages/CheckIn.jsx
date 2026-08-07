@@ -18,10 +18,10 @@ function CheckIn() {
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
 
-        setFormData({
-            ...formData,
+        setFormData((prev) => ({
+            ...prev,
             [name]: type === "checkbox" ? checked : value,
-        });
+        }));
     };
 
     const handleSubmit = (e) => {
@@ -67,7 +67,7 @@ function CheckIn() {
                     <label>Sleep Hours</label>
 
                     <input
-                        type="number"
+                        type="text"
                         name="sleep"
                         value={formData.sleep}
                         onChange={handleChange}
@@ -114,7 +114,7 @@ function CheckIn() {
                     <label>Focus Hours</label>
 
                     <input
-                        type="number"
+                        type="text"
                         name="focus"
                         value={formData.focus}
                         onChange={handleChange}
@@ -127,7 +127,7 @@ function CheckIn() {
                     <label>Water Intake (Litres)</label>
 
                     <input
-                        type="number"
+                        type="text"
                         name="water"
                         value={formData.water}
                         onChange={handleChange}
@@ -140,7 +140,7 @@ function CheckIn() {
                     <label>Study Hours</label>
 
                     <input
-                        type="number"
+                        type="text"
                         name="study"
                         value={formData.study}
                         onChange={handleChange}
