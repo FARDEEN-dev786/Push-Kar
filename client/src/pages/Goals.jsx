@@ -3,7 +3,9 @@ import { getGoals, saveGoals } from "../utils/goalsStorage";
 
 function Goals() {
   const [goals, setGoals] = useState([]);
-  const [newGoal, setNewGoal] = useState("");
+  const [goalType, setGoalType] = useState("study");
+
+  const [target, setTarget] = useState("");
 
   useEffect(() => {
     setGoals(getGoals());
@@ -14,18 +16,26 @@ function Goals() {
   }, [goals]);
 
   const addGoal = () => {
-    if (!newGoal.trim()) return;
+
+    if (!target) return;
 
     setGoals([
       ...goals,
+
       {
         id: Date.now(),
-        text: newGoal,
-        completed: false,
-      },
+
+        type: goalType,
+
+        target: Number(target),
+
+        completed: false
+      }
+
     ]);
 
-    setNewGoal("");
+    setTarget("");
+
   };
 
   const toggleGoal = (id) => {
@@ -49,11 +59,25 @@ function Goals() {
       </h1>
 
       <div className="flex gap-3 mb-6">
+
+        <select
+          value={goalType}
+          onChange={(e) => setGoalType(e.target.value)}
+          className="bg-slate-900 p-3 rounded-xl"
+        >
+          <option value="study">Study</option>
+          <option value="sleep">Sleep</option>
+          <option value="water">Water</option>
+          <option value="focus">Focus</option>
+          <option value="exercise">Exercise</option>
+        </select>
+
         <input
-          value={newGoal}
-          onChange={(e) => setNewGoal(e.target.value)}
-          placeholder="Add a goal..."
-          className="flex-1 p-3 rounded-xl bg-slate-900"
+          type="number"
+          value={target}
+          onChange={(e) => setTarget(e.target.value)}
+          placeholder="Target"
+          className="flex-1 bg-slate-900 rounded-xl p-3"
         />
 
         <button
@@ -62,6 +86,7 @@ function Goals() {
         >
           Add
         </button>
+
       </div>
 
       <div className="space-y-4">

@@ -2,6 +2,7 @@ import { getPerformanceHistory } from "../utils/historyStorage";
 import { calculateStreak } from "../utils/streakCalculator";
 import PerformanceChart from "../components/PerformanceChart";
 import WeeklyReport from "../components/WeeklyReport";
+import HabitInsights from "../components/HabitInsights";
 
 function Analytics() {
   const history = getPerformanceHistory();
@@ -101,6 +102,7 @@ function Analytics() {
         />
         <PerformanceChart />
         <WeeklyReport />
+        <HabitInsights />
 
       </div>
 
