@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { PerformanceContext } from "../context/PerformanceContext";
 import { calculateScore } from "../utils/scoreCalculator";
-
+import { savePerformanceHistory } from "../utils/historyStorage";
 
 function CheckIn() {
     const [formData, setFormData] = useState({
@@ -30,17 +30,18 @@ function CheckIn() {
         const score = calculateScore(formData);
 
         const updatedData = {
-  ...formData,
-  score,
-};
+            ...formData,
+            score,
+        };
 
-setPerformanceData(updatedData);
+        setPerformanceData(updatedData);
 
-// Save to localStorage
-localStorage.setItem(
-  "performanceData",
-  JSON.stringify(updatedData)
-);
+        // Save to localStorage
+        localStorage.setItem(
+            "performanceData",
+            JSON.stringify(updatedData)
+        );
+        savePerformanceHistory(updatedData);
 
         alert("Check-In Saved! 🎉");
     };
