@@ -1,6 +1,7 @@
 import { getPerformanceHistory } from "../utils/historyStorage";
 import { calculateStreak } from "../utils/streakCalculator";
 import PerformanceChart from "../components/PerformanceChart";
+import WeeklyReport from "../components/WeeklyReport";
 
 function Analytics() {
   const history = getPerformanceHistory();
@@ -99,6 +100,7 @@ function Analytics() {
           value={`${streak.longest} Days 🏆`}
         />
         <PerformanceChart />
+        <WeeklyReport />
 
       </div>
 
