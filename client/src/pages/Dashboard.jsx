@@ -5,6 +5,7 @@ import AIInsightCard from "../components/AIInsightCard";
 import TaskList from "../components/TaskList";
 import WeeklyChart from "../components/WeeklyChart";
 import TodaySummary from "../components/TodaySummary";
+import GoalComparison from "../components/GoalComparison";
 
 import { useContext } from "react";
 import { PerformanceContext } from "../context/PerformanceContext";
@@ -57,6 +58,7 @@ function Dashboard() {
 
           <AIInsightCard />
           <TodaySummary />
+          <GoalComparison />
 
         </div>
 
