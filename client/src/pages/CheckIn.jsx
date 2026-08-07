@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import { PerformanceContext } from "../context/PerformanceContext";
+import { calculateScore } from "../utils/scoreCalculator";
 
 
 function CheckIn() {
@@ -26,14 +27,7 @@ function CheckIn() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const score =
-            Number(formData.sleep) * 2 +
-            Number(formData.focus) * 5 +
-            Number(formData.study) * 3 +
-            Number(formData.water) * 4 +
-            Number(formData.mood) * 2 +
-            Number(formData.energy) * 2 +
-            (formData.exercise ? 15 : 0);
+        const score = calculateScore(formData);
 
         const updatedData = {
   ...formData,
