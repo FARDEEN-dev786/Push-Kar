@@ -4,6 +4,7 @@ import PerformanceChart from "../components/PerformanceChart";
 import WeeklyReport from "../components/WeeklyReport";
 import HabitInsights from "../components/HabitInsights";
 import MonthlyReport from "../components/MonthlyReport";
+import WeeklyComparison from "../components/WeeklyComparison";
 
 function Analytics() {
   const history = getPerformanceHistory();
@@ -103,6 +104,7 @@ function Analytics() {
         />
         <PerformanceChart />
         <WeeklyReport />
+        <WeeklyComparison />
         <MonthlyReport />
         <HabitInsights />
 
