@@ -14,55 +14,85 @@ import { Smile, Zap, Clock } from "lucide-react";
 
 function Dashboard() {
   const { performanceData } = useContext(PerformanceContext);
+
   return (
     <>
       <Navbar />
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
-        {/* LEFT COLUMN */}
-        <div className="lg:col-span-2 space-y-6">
+        {/* Page Header */}
+        <div className="mb-6">
+          <h1 className="text-3xl font-bold">
+            Dashboard
+          </h1>
 
-          <ScoreCard
-            score={performanceData.score}
-            change="Calculated from today's check-in"
-          />
+          <p className="text-gray-400 mt-1">
+            Your daily performance at a glance.
+          </p>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <StatCard
-              title="Mood"
-              value={`${performanceData.mood}/10`}
-              icon={<Smile size={30} />}
+        {/* Main Dashboard Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+          {/* LEFT COLUMN */}
+          <div className="lg:col-span-2 space-y-6">
+
+            {/* Performance Score */}
+            <ScoreCard
+              score={performanceData.score}
+              change="Calculated from today's check-in"
             />
 
-            <StatCard
-              title="Energy"
-              value={`${performanceData.energy}/10`}
-              icon={<Zap size={30} />}
-            />
+            {/* Quick Stats */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
 
-            <StatCard
-              title="Focus"
-              value={`${performanceData.focus} hrs`}
-              icon={<Clock size={30} />}
-            />
+              <StatCard
+                title="Mood"
+                value={`${performanceData.mood}/10`}
+                icon={<Smile size={30} />}
+              />
+
+              <StatCard
+                title="Energy"
+                value={`${performanceData.energy}/10`}
+                icon={<Zap size={30} />}
+              />
+
+              <StatCard
+                title="Focus"
+                value={`${performanceData.focus} hrs`}
+                icon={<Clock size={30} />}
+              />
+
+            </div>
+
+            {/* Tasks */}
+            <TaskList />
+
+            {/* Weekly Performance */}
+            <WeeklyChart />
+
           </div>
 
-          <TaskList />
-          <WeeklyChart />
+
+          {/* RIGHT COLUMN */}
+          <div className="space-y-6">
+
+            {/* AI Insight */}
+            <AIInsightCard />
+
+            {/* Today's Summary */}
+            <TodaySummary />
+
+            {/* Goal Progress */}
+            <GoalComparison />
+
+          </div>
 
         </div>
 
-        {/* RIGHT COLUMN */}
-        <div>
-
-          <AIInsightCard />
-          <TodaySummary />
-          <GoalComparison />
-
-        </div>
-
-      </div>
+      </main>
     </>
   );
 }
