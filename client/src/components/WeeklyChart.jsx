@@ -7,6 +7,7 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from "recharts";
+import { TrendingUp } from "lucide-react";
 
 const data = [
   { day: "Mon", score: 70 },
@@ -20,26 +21,35 @@ const data = [
 
 function WeeklyChart() {
   return (
-    <div className="bg-slate-800 rounded-2xl border border-slate-700 p-6">
+    <div className="rounded-3xl border border-[var(--pk-border)] bg-[var(--pk-surface)] p-6 shadow-lg">
 
       {/* Header */}
-      <div className="flex justify-between items-start mb-6">
+      <div className="flex items-center justify-between mb-6">
 
-        <div>
-          <h2 className="text-2xl font-bold">
-            Weekly Performance
-          </h2>
+        <div className="flex items-center gap-3">
 
-          <p className="text-gray-400 text-sm mt-1">
-            Your performance throughout the week
-          </p>
+          <div className="rounded-xl bg-[var(--pk-secondary)]/10 p-2.5 text-[var(--pk-secondary)]">
+            <TrendingUp size={21} />
+          </div>
+
+          <div>
+            <h2 className="text-xl font-bold">
+              Weekly Performance
+            </h2>
+
+            <p className="text-xs text-[var(--pk-text-muted)] mt-1">
+              Your performance throughout the week
+            </p>
+          </div>
+
         </div>
 
-        <div className="text-xs font-semibold text-cyan-300 bg-cyan-400/10 px-3 py-1 rounded-full">
-          7 Days
+        <div className="hidden sm:block rounded-full bg-[var(--pk-surface-soft)] px-3 py-1 text-xs font-semibold text-[var(--pk-text-muted)]">
+          This Week
         </div>
 
       </div>
+
 
       {/* Chart */}
       <div className="h-72">
@@ -57,7 +67,7 @@ function WeeklyChart() {
 
             <CartesianGrid
               strokeDasharray="3 3"
-              stroke="#334155"
+              stroke="var(--pk-border)"
               vertical={false}
             />
 
@@ -65,39 +75,52 @@ function WeeklyChart() {
               dataKey="day"
               axisLine={false}
               tickLine={false}
-              tick={{ fill: "#94a3b8", fontSize: 12 }}
+              tick={{
+                fill: "var(--pk-text-muted)",
+                fontSize: 12,
+              }}
             />
 
             <YAxis
               domain={[0, 100]}
               axisLine={false}
               tickLine={false}
-              tick={{ fill: "#94a3b8", fontSize: 12 }}
+              tick={{
+                fill: "var(--pk-text-muted)",
+                fontSize: 12,
+              }}
             />
 
             <Tooltip
               contentStyle={{
-                backgroundColor: "#0f172a",
-                border: "1px solid #334155",
+                backgroundColor: "var(--pk-surface-soft)",
+                border: "1px solid var(--pk-border)",
                 borderRadius: "12px",
-                color: "#e2e8f0",
+                color: "var(--pk-text)",
               }}
               labelStyle={{
-                color: "#94a3b8",
+                color: "var(--pk-text-muted)",
               }}
+              formatter={(value) => [
+                `${value}/100`,
+                "Score",
+              ]}
             />
 
             <Line
               type="monotone"
               dataKey="score"
-              stroke="#22d3ee"
+              stroke="var(--pk-primary)"
               strokeWidth={3}
               dot={{
                 r: 4,
-                fill: "#22d3ee",
+                fill: "var(--pk-primary)",
+                strokeWidth: 0,
               }}
               activeDot={{
                 r: 6,
+                fill: "var(--pk-secondary)",
+                strokeWidth: 0,
               }}
             />
 

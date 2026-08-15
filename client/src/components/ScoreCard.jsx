@@ -1,72 +1,58 @@
 function ScoreCard({ score, change }) {
-  const percentage = Math.min(Math.max(Number(score), 0), 100);
-
   return (
-    <div className="bg-slate-800 rounded-2xl p-6 shadow-lg border border-slate-700">
+    <div className="relative overflow-hidden rounded-3xl border border-[var(--pk-border)] bg-[var(--pk-surface)] p-6 shadow-lg">
 
-      {/* Header */}
-      <div className="flex justify-between items-start">
+      {/* Decorative gradient */}
+      <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[var(--pk-primary)] opacity-20 blur-3xl" />
 
-        <div>
-          <p className="text-gray-400 text-sm">
-            Performance Score
-          </p>
+      <div className="relative">
 
-          <p className="text-gray-500 text-xs mt-1">
-            Based on today's check-in
-          </p>
+        {/* Header */}
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-sm font-medium text-[var(--pk-text-muted)]">
+              Performance Score
+            </p>
+
+            <p className="mt-1 text-xs text-[var(--pk-text-muted)]">
+              Based on today's check-in
+            </p>
+          </div>
+
+          <div className="rounded-full bg-[var(--pk-primary)]/10 px-3 py-1 text-xs font-semibold text-[var(--pk-primary-soft)]">
+            Today
+          </div>
         </div>
 
-        <span className="text-xs font-semibold text-cyan-300 bg-cyan-400/10 px-3 py-1 rounded-full">
-          Daily
-        </span>
+        {/* Score */}
+        <div className="mt-6 flex items-end gap-3">
 
-      </div>
+          <h1 className="text-6xl font-bold tracking-tight">
+            {score}
+          </h1>
 
+          <span className="mb-2 text-sm text-[var(--pk-text-muted)]">
+            / 100
+          </span>
 
-      {/* Score */}
-      <div className="flex items-end gap-2 mt-5">
+        </div>
 
-        <h1 className="text-6xl font-bold tracking-tight">
-          {score}
-        </h1>
-
-        <span className="text-gray-400 text-lg mb-2">
-          /100
-        </span>
-
-      </div>
-
-
-      {/* Progress Bar */}
-      <div className="mt-5">
-
-        <div className="h-3 bg-slate-900 rounded-full overflow-hidden">
-
+        {/* Progress */}
+        <div className="mt-5 h-2 overflow-hidden rounded-full bg-[var(--pk-surface-soft)]">
           <div
-            className="h-full bg-cyan-400 rounded-full transition-all duration-500"
-            style={{ width: `${percentage}%` }}
+            className="h-full rounded-full bg-gradient-to-r from-[var(--pk-primary)] to-[var(--pk-secondary)] transition-all duration-500"
+            style={{
+              width: `${Math.min(Math.max(score, 0), 100)}%`,
+            }}
           />
-
         </div>
 
-        <div className="flex justify-between text-xs text-gray-500 mt-2">
-          <span>0</span>
-          <span>100</span>
-        </div>
-
-      </div>
-
-
-      {/* Status */}
-      <div className="mt-5 pt-4 border-t border-slate-700">
-
-        <p className="text-cyan-300 text-sm">
+        {/* Change message */}
+        <p className="mt-3 text-sm text-[var(--pk-text-muted)]">
           {change}
         </p>
 
       </div>
-
     </div>
   );
 }

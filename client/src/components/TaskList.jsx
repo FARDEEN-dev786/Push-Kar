@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { Trash2, Plus, Check } from "lucide-react";
+import {
+  Trash2,
+  Plus,
+  Check,
+  ListChecks,
+} from "lucide-react";
 
 function TaskList() {
   const [tasks, setTasks] = useState([
@@ -39,37 +44,40 @@ function TaskList() {
     setNewTask("");
   };
 
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      addTask();
-    }
-  };
-
   const completedTasks = tasks.filter(
     (task) => task.completed
   ).length;
 
   return (
-    <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
+    <div className="rounded-3xl border border-[var(--pk-border)] bg-[var(--pk-surface)] p-6 shadow-lg">
 
       {/* Header */}
-      <div className="flex justify-between items-center mb-5">
+      <div className="flex items-center justify-between mb-5">
 
-        <div>
-          <h2 className="text-2xl font-bold">
-            Today's Tasks
-          </h2>
+        <div className="flex items-center gap-3">
 
-          <p className="text-gray-400 text-sm mt-1">
-            {completedTasks} of {tasks.length} completed
-          </p>
+          <div className="rounded-xl bg-[var(--pk-primary)]/10 p-2.5 text-[var(--pk-primary)]">
+            <ListChecks size={21} />
+          </div>
+
+          <div>
+            <h2 className="text-xl font-bold">
+              Today's Tasks
+            </h2>
+
+            <p className="text-xs text-[var(--pk-text-muted)] mt-1">
+              {completedTasks} of {tasks.length} completed
+            </p>
+          </div>
+
         </div>
 
-        <div className="text-sm text-cyan-300 bg-cyan-400/10 px-3 py-1 rounded-full">
-          {tasks.length} Tasks
+        <div className="rounded-full bg-[var(--pk-surface-soft)] px-3 py-1 text-xs font-semibold text-[var(--pk-text-muted)]">
+          {tasks.length} tasks
         </div>
 
       </div>
+
 
       {/* Add Task */}
       <div className="flex gap-3 mb-5">
@@ -78,14 +86,18 @@ function TaskList() {
           type="text"
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
-          onKeyDown={handleKeyDown}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              addTask();
+            }
+          }}
           placeholder="What do you want to accomplish?"
-          className="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 outline-none focus:border-cyan-400 transition"
+          className="min-w-0 flex-1 rounded-xl border border-[var(--pk-border)] bg-[var(--pk-surface-soft)] px-4 py-3 text-sm outline-none placeholder:text-[var(--pk-text-muted)] focus:border-[var(--pk-primary)] focus:ring-2 focus:ring-[var(--pk-primary)]/20"
         />
 
         <button
           onClick={addTask}
-          className="bg-cyan-500 hover:bg-cyan-600 px-4 sm:px-5 rounded-xl font-semibold transition flex items-center gap-2"
+          className="flex items-center gap-2 rounded-xl bg-[var(--pk-primary)] px-4 py-3 text-sm font-semibold text-white transition-all hover:brightness-110 active:scale-95"
         >
           <Plus size={18} />
           <span className="hidden sm:inline">
@@ -95,67 +107,74 @@ function TaskList() {
 
       </div>
 
+
       {/* Tasks */}
       <div className="space-y-3">
 
         {tasks.length === 0 ? (
-          <div className="text-center py-8 text-gray-500">
-            No tasks yet. Add something you want to accomplish.
+
+          <div className="rounded-xl border border-dashed border-[var(--pk-border)] p-8 text-center">
+            <p className="text-sm text-[var(--pk-text-muted)]">
+              No tasks yet. Add something you want to accomplish today.
+            </p>
           </div>
+
         ) : (
+
           tasks.map((task) => (
+
             <div
               key={task.id}
-              className={`flex items-center justify-between gap-3 bg-slate-900 rounded-xl p-4 border border-transparent hover:border-slate-700 transition ${
-                task.completed ? "opacity-70" : ""
-              }`}
+              className="group flex items-center justify-between gap-3 rounded-xl border border-transparent bg-[var(--pk-surface-soft)] p-4 transition-all duration-200 hover:border-[var(--pk-border)]"
             >
 
-              {/* Task */}
-              <button
-                onClick={() => toggleTask(task.id)}
-                className="flex items-center gap-3 text-left flex-1"
-              >
-                <span
-                  className={`w-6 h-6 rounded-lg border flex items-center justify-center shrink-0 transition ${
+              <div className="flex min-w-0 items-center gap-3">
+
+                {/* Custom checkbox */}
+                <button
+                  onClick={() => toggleTask(task.id)}
+                  className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-md border transition-all ${
                     task.completed
-                      ? "bg-cyan-500 border-cyan-500"
-                      : "border-slate-600 hover:border-cyan-400"
+                      ? "border-[var(--pk-primary)] bg-[var(--pk-primary)] text-white"
+                      : "border-[var(--pk-border)] hover:border-[var(--pk-primary)]"
                   }`}
+                  aria-label={
+                    task.completed
+                      ? "Mark task incomplete"
+                      : "Mark task complete"
+                  }
                 >
                   {task.completed && (
-                    <Check
-                      size={16}
-                      className="text-slate-950"
-                    />
+                    <Check size={13} strokeWidth={3} />
                   )}
-                </span>
+                </button>
 
                 <span
-                  className={
+                  className={`truncate text-sm transition-all ${
                     task.completed
-                      ? "line-through text-gray-500"
-                      : "text-gray-200"
-                  }
+                      ? "text-[var(--pk-text-muted)] line-through"
+                      : "text-[var(--pk-text)]"
+                  }`}
                 >
                   {task.text}
                 </span>
-              </button>
+
+              </div>
+
 
               {/* Delete */}
               <button
                 onClick={() => deleteTask(task.id)}
-                className="p-2 rounded-lg hover:bg-red-400/10 transition"
+                className="shrink-0 rounded-lg p-2 text-[var(--pk-text-muted)] opacity-60 transition-all hover:bg-red-500/10 hover:text-red-400 group-hover:opacity-100"
                 aria-label="Delete task"
               >
-                <Trash2
-                  size={18}
-                  className="text-red-400 hover:text-red-300"
-                />
+                <Trash2 size={17} />
               </button>
 
             </div>
+
           ))
+
         )}
 
       </div>

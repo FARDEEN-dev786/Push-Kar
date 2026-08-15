@@ -16,7 +16,8 @@ function Dashboard() {
   const { performanceData } = useContext(PerformanceContext);
 
   return (
-    <>
+    <div className="min-h-screen bg-[var(--pk-background)] text-[var(--pk-text)]">
+
       <Navbar />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -27,7 +28,7 @@ function Dashboard() {
             Dashboard
           </h1>
 
-          <p className="text-gray-400 mt-1">
+          <p className="text-[var(--pk-text-muted)] mt-1">
             Your daily performance at a glance.
           </p>
         </div>
@@ -75,7 +76,6 @@ function Dashboard() {
 
           </div>
 
-
           {/* RIGHT COLUMN */}
           <div className="space-y-6">
 
@@ -93,7 +93,8 @@ function Dashboard() {
         </div>
 
       </main>
-    </>
+
+    </div>
   );
 }
 

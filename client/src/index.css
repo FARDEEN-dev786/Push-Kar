@@ -1,1 +1,188 @@
 @import "tailwindcss";
+
+/* =====================================================
+   PUSH-KAR DESIGN SYSTEM
+   Shadcn Structure + Soft Pop / Vibrant Productivity
+   ===================================================== */
+
+/* ---------- DARK THEME ---------- */
+
+:root {
+  --pk-background: #0b1020;
+  --pk-surface: #151d32;
+  --pk-surface-soft: #1c2740;
+  --pk-border: #2a3855;
+
+  --pk-text: #f8fafc;
+  --pk-text-muted: #94a3b8;
+
+  --pk-primary: #8b5cf6;
+  --pk-primary-soft: #a78bfa;
+  --pk-secondary: #22d3ee;
+
+  --pk-success: #34d399;
+  --pk-warning: #fbbf24;
+  --pk-danger: #fb7185;
+
+  --pk-glow: rgba(139, 92, 246, 0.18);
+}
+
+
+/* ---------- BRIGHT THEME ---------- */
+
+[data-theme="bright"] {
+  --pk-background: #f8fafc;
+  --pk-surface: #ffffff;
+  --pk-surface-soft: #f1f5f9;
+  --pk-border: #e2e8f0;
+
+  --pk-text: #0f172a;
+  --pk-text-muted: #64748b;
+
+  --pk-primary: #6366f1;
+  --pk-primary-soft: #818cf8;
+  --pk-secondary: #06b6d4;
+
+  --pk-success: #10b981;
+  --pk-warning: #f59e0b;
+  --pk-danger: #f43f5e;
+
+  --pk-glow: rgba(99, 102, 241, 0.12);
+}
+
+
+/* ---------- ORANGE THEME ---------- */
+
+[data-theme="orange"] {
+  --pk-background: #17100b;
+  --pk-surface: #25170f;
+  --pk-surface-soft: #342014;
+  --pk-border: #51301d;
+
+  --pk-text: #fff7ed;
+  --pk-text-muted: #c4a48a;
+
+  --pk-primary: #f97316;
+  --pk-primary-soft: #fb923c;
+  --pk-secondary: #fbbf24;
+
+  --pk-success: #34d399;
+  --pk-warning: #fbbf24;
+  --pk-danger: #fb7185;
+
+  --pk-glow: rgba(249, 115, 22, 0.18);
+}
+
+
+/* ---------- PINK THEME ---------- */
+
+[data-theme="pink"] {
+  --pk-background: #180d17;
+  --pk-surface: #281326;
+  --pk-surface-soft: #381a34;
+  --pk-border: #56304e;
+
+  --pk-text: #fff1f8;
+  --pk-text-muted: #c9a3bb;
+
+  --pk-primary: #ec4899;
+  --pk-primary-soft: #f472b6;
+  --pk-secondary: #a855f7;
+
+  --pk-success: #34d399;
+  --pk-warning: #fbbf24;
+  --pk-danger: #fb7185;
+
+  --pk-glow: rgba(236, 72, 153, 0.18);
+}
+
+
+/* =====================================================
+   GLOBAL STYLES
+   ===================================================== */
+
+html {
+  background: var(--pk-background);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--pk-background);
+  color: var(--pk-text);
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  transition:
+    background-color 250ms ease,
+    color 250ms ease;
+}
+
+
+/* =====================================================
+   PUSH-KAR DESIGN UTILITIES
+   ===================================================== */
+
+.pk-surface {
+  background: var(--pk-surface);
+  border: 1px solid var(--pk-border);
+}
+
+.pk-surface-soft {
+  background: var(--pk-surface-soft);
+}
+
+.pk-text {
+  color: var(--pk-text);
+}
+
+.pk-muted {
+  color: var(--pk-text-muted);
+}
+
+.pk-primary {
+  color: var(--pk-primary);
+}
+
+.pk-primary-bg {
+  background: var(--pk-primary);
+}
+
+.pk-border {
+  border-color: var(--pk-border);
+}
+
+
+/* ---------- Soft Glow ---------- */
+
+.pk-glow {
+  box-shadow:
+    0 0 30px var(--pk-glow);
+}
+
+
+/* ---------- Gradient Accent ---------- */
+
+.pk-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--pk-primary),
+    var(--pk-secondary)
+  );
+}
+
+
+/* ---------- Smooth Theme Transitions ---------- */
+
+* {
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease;
+}
