@@ -33,7 +33,7 @@ function MonthlyReport() {
   );
 
   return (
-    <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6 mt-6">
+    <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6 ">
       <h2 className="text-2xl font-bold mb-6">
         📅 Monthly Report
       </h2>
