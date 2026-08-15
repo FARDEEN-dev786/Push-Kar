@@ -1,159 +1,335 @@
 # 🗺️ Push-Kar Development Roadmap
 
+> Last Updated: 15 August 2026
+
 ---
 
 # Version 0.1 ✅
-Frontend Foundation
+## Frontend Foundation
 
-Status: COMPLETED
+**Status: COMPLETED**
 
-✔ React + Vite
-✔ Tailwind CSS
-✔ Sidebar
-✔ Navbar
-✔ Dashboard
-✔ Task List
-✔ Weekly Chart
-✔ AI Insight Card
-
----
-
-# Version 0.2 🚧
-Dynamic Dashboard
-
-Status: IN PROGRESS
-
-✔ React Router
-✔ Daily Check-In
-✔ React Context
-✔ Dashboard connected to Context
-
-⬜ Save data in localStorage
-⬜ Load saved data automatically
-⬜ Better Performance Score Engine
-⬜ Dynamic AI Insight Card
+- ✔ React + Vite
+- ✔ Tailwind CSS
+- ✔ Dashboard
+- ✔ Sidebar
+- ✔ Navbar
+- ✔ Task List
+- ✔ React Router
+- ✔ AI Insight Card
+- ✔ Initial performance chart
 
 ---
 
-# Version 0.3
-Analytics System
+# Version 0.2 ✅
+## Dynamic Performance System
 
-Status: NOT STARTED
+**Status: COMPLETED**
 
-⬜ Weekly Analytics
-⬜ Monthly Analytics
-⬜ Streak Tracking
-⬜ Habit Tracking
-⬜ Goal Progress
-⬜ Better Charts
+- ✔ Daily Check-In
+- ✔ React Context API
+- ✔ Performance Context
+- ✔ Dynamic Dashboard
+- ✔ Performance Score Calculator
+- ✔ Mood Tracking
+- ✔ Energy Tracking
+- ✔ Focus Tracking
+- ✔ Exercise Tracking
+- ✔ Journal
+- ✔ localStorage
+- ✔ Performance History
+- ✔ Goals Storage
 
 ---
 
-# Version 0.4
-Backend
+# Version 0.3 🚧
+## Analytics & Performance Intelligence
 
-Status: NOT STARTED
+**Status: IN PROGRESS**
 
-⬜ Express Server
-⬜ REST API
-⬜ CRUD Operations
-⬜ Environment Variables
-⬜ API Testing
+### Analytics
+
+- ✔ Performance Trend Chart
+- ✔ Current Streak
+- ✔ Longest Streak
+- ✔ Weekly Report
+- ✔ Monthly Report
+- ✔ Habit Insights
+- ✔ Goal vs Actual Comparison
+
+### Goals
+
+- ✔ Structured Goal Model
+- ✔ Study Goal
+- ✔ Sleep Goal
+- ✔ Water Goal
+- ✔ Focus Goal
+- ✔ Exercise Goal
+- 🔄 Improve Boolean Goal Handling
+
+### Data Quality
+
+- 🔄 One Check-In Per Calendar Day
+- 🔄 Prevent Duplicate Daily Entries
+- 🔄 Improve Date Handling
+- 🔄 Improve Streak Accuracy
+
+### Advanced Analytics
+
+- ⬜ Current Week vs Previous Week
+- ⬜ Better Monthly Trends
+- ⬜ Best/Worst Habit Analysis
+- ⬜ More Meaningful Correlations
+
+---
+
+# Version 0.4 🚧
+## Focused Intelligence
+
+**Status: PLANNED**
+
+- ⬜ AI Coach Insight
+- ⬜ Weekly Personalized Summary
+- ⬜ Plain-English Performance Explanation
+- ⬜ Simple Rule-Based Prediction
+- ⬜ Personalized Recommendations
+
+### Prediction Scope
+
+Keep prediction simple:
+
+History
+↓
+Pattern Analysis
+↓
+Prediction
+
+No complex ML system for v1.
 
 ---
 
 # Version 0.5
-Database
+## UI / UX Overhaul
 
-Status: NOT STARTED
+**Status: PLANNED**
 
-⬜ MongoDB Atlas
-⬜ User Schema
-⬜ Daily Check-In Schema
-⬜ Task Schema
-⬜ Goals Schema
+- ⬜ Modern Push-Kar design
+- ⬜ Better dashboard
+- ⬜ Improved cards
+- ⬜ Better typography
+- ⬜ Better spacing
+- ⬜ Improved charts
+- ⬜ Empty states
+- ⬜ Loading states
+- ⬜ Animations
+- ⬜ Mobile responsiveness
+- ⬜ Accessibility improvements
+- ⬜ Reusable UI components
 
 ---
 
 # Version 0.6
-Authentication
+## Frontend Refactoring
 
-Status: NOT STARTED
+**Status: PLANNED**
 
-⬜ User Signup
-⬜ User Login
-⬜ Password Hashing
-⬜ JWT Authentication
-⬜ Protected Routes
+- ⬜ Reusable Card component
+- ⬜ Reusable Button component
+- ⬜ Cleaner utilities
+- ⬜ Separate business logic from UI
+- ⬜ Better data-layer abstraction
+- ⬜ Remove duplicated logic
+- ⬜ Improve folder structure
+- ⬜ Improve naming consistency
 
 ---
 
 # Version 0.7
-AI Integration
+## Backend
 
-Status: NOT STARTED
+**Status: PLANNED**
 
-⬜ Gemini API
-⬜ AI Performance Analysis
-⬜ Daily Suggestions
-⬜ Weekly Review
-⬜ Personalized Advice
+- ⬜ Node.js
+- ⬜ Express.js
+- ⬜ REST API
+- ⬜ CRUD operations
+- ⬜ Environment variables
+- ⬜ API error handling
+- ⬜ API testing
 
 ---
 
 # Version 0.8
-Polish
+## Database
 
-Status: NOT STARTED
+**Status: PLANNED**
 
-⬜ Animations
-⬜ Dark Mode Improvements
-⬜ Better UI
-⬜ Loading Screens
-⬜ Error Pages
-⬜ Toast Notifications
+- ⬜ MongoDB Atlas Free Tier
+- ⬜ User Schema
+- ⬜ Daily Check-In Schema
+- ⬜ Performance History Schema
+- ⬜ Task Schema
+- ⬜ Goals Schema
+- ⬜ Database CRUD
 
 ---
 
 # Version 0.9
-Testing
+## Authentication
 
-Status: NOT STARTED
+**Status: PLANNED**
 
-⬜ Bug Fixes
-⬜ Responsive Testing
-⬜ Performance Optimization
-⬜ Lighthouse Optimization
+- ⬜ Signup
+- ⬜ Login
+- ⬜ Password Hashing
+- ⬜ JWT Authentication
+- ⬜ Protected Routes
+- ⬜ User-specific Data
+
+---
+
+# Version 0.10
+## Testing & Optimization
+
+**Status: PLANNED**
+
+- ⬜ Functional Testing
+- ⬜ Bug Fixing
+- ⬜ Responsive Testing
+- ⬜ Performance Optimization
+- ⬜ Lighthouse Optimization
+- ⬜ Error Handling
+- ⬜ Data Validation
+- ⬜ Edge-case Testing
 
 ---
 
 # Version 1.0 🎉
-Public Release
+## Public Release
 
-Status: NOT STARTED
+**Status: PLANNED**
 
-⬜ Deploy Frontend (Vercel)
-⬜ Deploy Backend (Render)
-⬜ Connect MongoDB Atlas
-⬜ Final README
-⬜ Screenshots
-⬜ Demo Video
-⬜ GitHub Release
-⬜ Resume Project Entry
+### Deployment
+
+- ⬜ Free frontend hosting
+- ⬜ Free backend hosting
+- ⬜ MongoDB Atlas
+- ⬜ Production environment variables
+- ⬜ Production build verification
+
+### Documentation
+
+- ⬜ Final README
+- ⬜ Screenshots
+- ⬜ Demo Video
+- ⬜ Setup Instructions
+- ⬜ API Documentation
+- ⬜ GitHub Release
+
+### Portfolio
+
+- ⬜ Resume Project Entry
+- ⬜ Portfolio Description
+- ⬜ Hackathon Demo
 
 ---
 
-# 🌟 Future Ideas (Post v1.0)
+# 🌟 Post-v1.0 Ideas
 
-⬜ Progressive Web App (PWA)
-⬜ Mobile App
-⬜ Friend Challenges
-⬜ Leaderboards
-⬜ Calendar Heatmap
-⬜ Export Reports (PDF)
-⬜ Google Calendar Integration
-⬜ Wearable Device Integration
-⬜ Voice Journaling
-⬜ AI Chat Coach
-⬜ Achievement Badges
-⬜ Smart Notifications
+These are intentionally outside the v1 scope.
+
+- ⬜ Calendar Heatmap
+- ⬜ Achievement Badges
+- ⬜ PWA
+- ⬜ Mobile App
+- ⬜ PDF Reports
+- ⬜ Google Calendar Integration
+- ⬜ Wearable Integration
+- ⬜ Voice Journaling
+- ⬜ Friend Challenges
+- ⬜ Leaderboards
+- ⬜ AI Chat Coach
+- ⬜ Smart Notifications
+
+---
+
+# 🚫 Not Part of v1
+
+To keep Push-Kar focused:
+
+- ❌ Social Network
+- ❌ Friend System
+- ❌ Leaderboards
+- ❌ Complex AI Chatbot
+- ❌ Complex Machine Learning Prediction
+- ❌ Subscription System
+- ❌ Paid Services
+
+---
+
+# 📍 Current Position
+
+v0.1 Foundation
+██████████ 100%
+
+v0.2 Dynamic System
+██████████ 100%
+
+v0.3 Analytics
+████████░░ ~80%
+
+v0.4 Intelligence
+██░░░░░░░░ Planned
+
+v0.5 UI/UX
+░░░░░░░░░░ Planned
+
+v0.6 Refactor
+░░░░░░░░░░ Planned
+
+v0.7 Backend
+░░░░░░░░░░ Planned
+
+v0.8 Database
+░░░░░░░░░░ Planned
+
+v0.9 Authentication
+░░░░░░░░░░ Planned
+
+v0.10 Testing
+░░░░░░░░░░ Planned
+
+v1.0 Release
+░░░░░░░░░░ Planned
+
+---
+
+# 🧭 Immediate Next Steps
+
+1. History refactor
+2. One check-in per day
+3. Verify streak system
+4. Week vs previous-week comparison
+5. Refine monthly analytics
+6. Fix Exercise goal handling
+7. AI Coach
+8. Simple prediction
+9. UI overhaul
+10. Frontend refactor
+11. Backend
+12. Database
+13. Authentication
+14. Testing
+15. Deployment
+
+---
+
+# 💡 Core Development Rule
+
+Every feature must satisfy at least one:
+
+- Improves the user's experience.
+- Makes performance analysis more useful.
+- Demonstrates a meaningful software engineering concept.
+
+If it doesn't, it doesn't belong in Push-Kar v1.
