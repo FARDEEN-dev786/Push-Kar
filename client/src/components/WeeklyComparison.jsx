@@ -63,7 +63,7 @@ function WeeklyComparison() {
     ];
 
     return (
-        <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6 mt-6">
+        <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
 
             <h2 className="text-2xl font-bold mb-2">
                 📊 Week vs Previous Week
@@ -79,6 +79,10 @@ function WeeklyComparison() {
 
                     const difference =
                         metric.current - metric.previous;
+                    const percentageChange =
+                        metric.previous === 0
+                            ? null
+                            : (difference / metric.previous) * 100;
 
                     const improved = difference > 0;
                     const declined = difference < 0;
@@ -119,20 +123,15 @@ function WeeklyComparison() {
                                             improved
                                                 ? "text-green-400 font-semibold"
                                                 : declined
-                                                ? "text-red-400 font-semibold"
-                                                : "text-gray-400 font-semibold"
+                                                    ? "text-red-400 font-semibold"
+                                                    : "text-gray-400 font-semibold"
                                         }
                                     >
-                                        {improved
-                                            ? "↑"
-                                            : declined
-                                            ? "↓"
-                                            : "→"}{" "}
-                                        {Math.abs(
-                                            difference
-                                        ).toFixed(
-                                            metric.decimals
-                                        )}
+                                        {percentageChange === null
+                                            ? "No previous data"
+                                            : `${improved ? "↑" : declined ? "↓" : "→"} ${Math.abs(
+                                                percentageChange
+                                            ).toFixed(1)}%`}
                                     </p>
 
                                 </div>
