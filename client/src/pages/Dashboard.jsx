@@ -7,6 +7,7 @@ import WeeklyChart from "../components/WeeklyChart";
 import TodaySummary from "../components/TodaySummary";
 import GoalComparison from "../components/GoalComparison";
 
+
 import { useContext } from "react";
 import { PerformanceContext } from "../context/PerformanceContext";
 
@@ -56,7 +57,7 @@ function Dashboard() {
               />
 
             </div>
-
+            
             <TaskList />
 
             <WeeklyChart />
