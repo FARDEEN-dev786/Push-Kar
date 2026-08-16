@@ -2,12 +2,14 @@ import Sidebar from "./Sidebar";
 
 function Layout({ children }) {
   return (
-    <div className="flex bg-slate-900 text-white min-h-screen">
+    <div className="min-h-screen bg-[var(--pk-background)] text-[var(--pk-text)]">
+
       <Sidebar />
 
-      <main className="flex-1 p-8">
+      <main className="ml-64 min-h-screen p-8">
         {children}
       </main>
+
     </div>
   );
 }

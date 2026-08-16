@@ -9,6 +9,7 @@
 
 :root {
   --pk-background: #0b1020;
+  --pk-sidebar: #111827;
   --pk-surface: #151d32;
   --pk-surface-soft: #1c2740;
   --pk-border: #2a3855;
@@ -32,6 +33,7 @@
 
 [data-theme="bright"] {
   --pk-background: #f8fafc;
+  --pk-sidebar: #ffffff;
   --pk-surface: #ffffff;
   --pk-surface-soft: #f1f5f9;
   --pk-border: #e2e8f0;
@@ -55,6 +57,7 @@
 
 [data-theme="orange"] {
   --pk-background: #17100b;
+  --pk-sidebar: #1c120c;
   --pk-surface: #25170f;
   --pk-surface-soft: #342014;
   --pk-border: #51301d;
@@ -78,6 +81,7 @@
 
 [data-theme="pink"] {
   --pk-background: #180d17;
+  --pk-sidebar: #160b15;
   --pk-surface: #281326;
   --pk-surface-soft: #381a34;
   --pk-border: #56304e;
@@ -180,9 +184,3 @@ body {
 
 /* ---------- Smooth Theme Transitions ---------- */
 
-* {
-  transition:
-    background-color 200ms ease,
-    border-color 200ms ease,
-    color 200ms ease;
-}

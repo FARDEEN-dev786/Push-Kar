@@ -1,8 +1,9 @@
 import { useContext } from "react";
+import { Target, CheckCircle2, AlertTriangle, XCircle } from "lucide-react";
+
 import { PerformanceContext } from "../context/PerformanceContext";
 import { getGoals } from "../utils/goalsStorage";
 import { compareGoals } from "../utils/goalComparison";
-import { Target, CheckCircle2, AlertTriangle, XCircle } from "lucide-react";
 
 function GoalComparison() {
   const { performanceData } = useContext(PerformanceContext);
@@ -18,63 +19,28 @@ function GoalComparison() {
     return null;
   }
 
-  const getStatusIcon = (status) => {
-    if (status === "success") {
-      return (
-        <CheckCircle2
-          size={18}
-          className="text-green-400"
-        />
-      );
-    }
-
-    if (status === "warning") {
-      return (
-        <AlertTriangle
-          size={18}
-          className="text-yellow-400"
-        />
-      );
-    }
-
-    return (
-      <XCircle
-        size={18}
-        className="text-red-400"
-      />
-    );
-  };
-
-  const getStatusColor = (status) => {
-    if (status === "success") {
-      return "text-green-400";
-    }
-
-    if (status === "warning") {
-      return "text-yellow-400";
-    }
-
-    return "text-red-400";
-  };
-
   return (
-    <div className="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+    <div className="rounded-3xl border border-[var(--pk-border)] bg-[var(--pk-surface)] p-6 shadow-lg">
 
       {/* Header */}
-      <div className="flex items-center gap-3 mb-6">
+      <div className="mb-6 flex items-center justify-between">
 
-        <div className="bg-cyan-400/10 text-cyan-400 p-2 rounded-xl">
-          <Target size={20} />
-        </div>
+        <div className="flex items-center gap-3">
 
-        <div>
-          <h2 className="text-2xl font-bold">
-            Goal Comparison
-          </h2>
+          <div className="rounded-xl bg-[var(--pk-primary)]/10 p-2.5 text-[var(--pk-primary)]">
+            <Target size={21} />
+          </div>
 
-          <p className="text-gray-400 text-sm mt-1">
-            Compare today's performance with your goals
-          </p>
+          <div>
+            <h2 className="text-xl font-bold">
+              Goal Comparison
+            </h2>
+
+            <p className="mt-1 text-xs text-[var(--pk-text-muted)]">
+              Today's progress against your goals
+            </p>
+          </div>
+
         </div>
 
       </div>
@@ -83,74 +49,91 @@ function GoalComparison() {
       {/* Goals */}
       <div className="space-y-3">
 
-        {comparison.map((goal) => (
+        {comparison.map((goal) => {
 
-          <div
-            key={goal.id}
-            className="bg-slate-900 rounded-xl p-4 border border-transparent hover:border-slate-700 transition"
-          >
+          const isSuccess = goal.status === "success";
+          const isWarning = goal.status === "warning";
 
-            {/* Goal title */}
-            <div className="flex justify-between items-center gap-3">
+          const Icon = isSuccess
+            ? CheckCircle2
+            : isWarning
+              ? AlertTriangle
+              : XCircle;
 
-              <h3 className="font-semibold capitalize">
-                {goal.type}
-              </h3>
+          const statusColor = isSuccess
+            ? "text-emerald-400"
+            : isWarning
+              ? "text-amber-400"
+              : "text-rose-400";
 
-              {getStatusIcon(goal.status)}
+          const statusBackground = isSuccess
+            ? "bg-emerald-400/10"
+            : isWarning
+              ? "bg-amber-400/10"
+              : "bg-rose-400/10";
 
-            </div>
-
-
-            {/* Goal vs Actual */}
-            <div className="grid grid-cols-2 gap-3 mt-4">
-
-              <div className="bg-slate-800 rounded-lg p-3">
-
-                <p className="text-gray-500 text-xs">
-                  Goal
-                </p>
-
-                <p className="font-semibold mt-1">
-                  {goal.type === "exercise"
-                    ? "Yes"
-                    : goal.target}
-                </p>
-
-              </div>
-
-
-              <div className="bg-slate-800 rounded-lg p-3">
-
-                <p className="text-gray-500 text-xs">
-                  Actual
-                </p>
-
-                <p className="font-semibold mt-1">
-                  {goal.type === "exercise"
-                    ? goal.actual
-                      ? "Yes"
-                      : "No"
-                    : goal.actual}
-                </p>
-
-              </div>
-
-            </div>
-
-
-            {/* Status message */}
-            <p
-              className={`text-sm mt-3 ${getStatusColor(
-                goal.status
-              )}`}
+          return (
+            <div
+              key={goal.id}
+              className="rounded-2xl border border-[var(--pk-border)] bg-[var(--pk-surface-soft)] p-4 transition-all duration-200 hover:border-[var(--pk-primary)]/30"
             >
-              {goal.message}
-            </p>
 
-          </div>
+              {/* Goal title */}
+              <div className="flex items-center justify-between gap-3">
 
-        ))}
+                <h3 className="font-semibold capitalize">
+                  {goal.type}
+                </h3>
+
+                <div
+                  className={`rounded-lg p-2 ${statusBackground} ${statusColor}`}
+                >
+                  <Icon size={17} />
+                </div>
+
+              </div>
+
+
+              {/* Values */}
+              <div className="mt-4 grid grid-cols-2 gap-3">
+
+                <div>
+                  <p className="text-xs text-[var(--pk-text-muted)]">
+                    Goal
+                  </p>
+
+                  <p className="mt-1 text-sm font-semibold">
+                    {goal.type === "exercise"
+                      ? "Yes"
+                      : goal.target}
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-xs text-[var(--pk-text-muted)]">
+                    Actual
+                  </p>
+
+                  <p className="mt-1 text-sm font-semibold">
+                    {goal.type === "exercise"
+                      ? goal.actual
+                        ? "Yes"
+                        : "No"
+                      : goal.actual}
+                  </p>
+                </div>
+
+              </div>
+
+
+              {/* Status */}
+              <p className={`mt-4 text-sm font-medium ${statusColor}`}>
+                {goal.message}
+              </p>
+
+            </div>
+          );
+        })}
 
       </div>
 

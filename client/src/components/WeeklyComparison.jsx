@@ -1,151 +1,195 @@
 import { getWeeklyComparison } from "../utils/weeklyComparison";
+import { ArrowUp, ArrowDown, Minus, BarChart3 } from "lucide-react";
 
 function WeeklyComparison() {
-    const { current, previous } = getWeeklyComparison();
+  const { current, previous } = getWeeklyComparison();
 
-    const metrics = [
-        {
-            label: "Average Score",
-            current: current.score,
-            previous: previous.score,
-            suffix: "",
-            decimals: 0,
-        },
-        {
-            label: "Average Sleep",
-            current: current.sleep,
-            previous: previous.sleep,
-            suffix: " hrs",
-            decimals: 1,
-        },
-        {
-            label: "Average Mood",
-            current: current.mood,
-            previous: previous.mood,
-            suffix: "/10",
-            decimals: 1,
-        },
-        {
-            label: "Average Energy",
-            current: current.energy,
-            previous: previous.energy,
-            suffix: "/10",
-            decimals: 1,
-        },
-        {
-            label: "Water",
-            current: current.water,
-            previous: previous.water,
-            suffix: " L",
-            decimals: 1,
-        },
-        {
-            label: "Study",
-            current: current.study,
-            previous: previous.study,
-            suffix: " hrs",
-            decimals: 1,
-        },
-        {
-            label: "Focus",
-            current: current.focus,
-            previous: previous.focus,
-            suffix: " hrs",
-            decimals: 1,
-        },
-        {
-            label: "Exercise Days",
-            current: current.exercise,
-            previous: previous.exercise,
-            suffix: "",
-            decimals: 0,
-        },
-    ];
+  const metrics = [
+    {
+      label: "Average Score",
+      current: current.score,
+      previous: previous.score,
+      suffix: "",
+      decimals: 0,
+    },
+    {
+      label: "Average Sleep",
+      current: current.sleep,
+      previous: previous.sleep,
+      suffix: " hrs",
+      decimals: 1,
+    },
+    {
+      label: "Average Mood",
+      current: current.mood,
+      previous: previous.mood,
+      suffix: "/10",
+      decimals: 1,
+    },
+    {
+      label: "Average Energy",
+      current: current.energy,
+      previous: previous.energy,
+      suffix: "/10",
+      decimals: 1,
+    },
+    {
+      label: "Water",
+      current: current.water,
+      previous: previous.water,
+      suffix: " L",
+      decimals: 1,
+    },
+    {
+      label: "Study",
+      current: current.study,
+      previous: previous.study,
+      suffix: " hrs",
+      decimals: 1,
+    },
+    {
+      label: "Focus",
+      current: current.focus,
+      previous: previous.focus,
+      suffix: " hrs",
+      decimals: 1,
+    },
+    {
+      label: "Exercise Days",
+      current: current.exercise,
+      previous: previous.exercise,
+      suffix: "",
+      decimals: 0,
+    },
+  ];
 
-    return (
-        <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
+  return (
+    <div className="rounded-3xl border border-[var(--pk-border)] bg-[var(--pk-surface)] p-6 shadow-lg">
 
-            <h2 className="text-2xl font-bold mb-2">
-                📊 Week vs Previous Week
-            </h2>
+      {/* Header */}
+      <div className="mb-6 flex items-start gap-3">
 
-            <p className="text-gray-400 mb-6">
-                See how your performance is changing over time.
-            </p>
+        <div className="rounded-xl bg-[var(--pk-secondary)]/10 p-2.5 text-[var(--pk-secondary)]">
+          <BarChart3 size={21} />
+        </div>
 
-            <div className="space-y-4">
+        <div>
+          <h2 className="text-xl font-bold">
+            Week vs Previous Week
+          </h2>
 
-                {metrics.map((metric) => {
+          <p className="mt-1 text-xs text-[var(--pk-text-muted)]">
+            See how your performance is changing over time.
+          </p>
+        </div>
 
-                    const difference =
-                        metric.current - metric.previous;
-                    const percentageChange =
-                        metric.previous === 0
-                            ? null
-                            : (difference / metric.previous) * 100;
+      </div>
 
-                    const improved = difference > 0;
-                    const declined = difference < 0;
 
-                    return (
-                        <div
-                            key={metric.label}
-                            className="bg-slate-900 rounded-xl p-4"
-                        >
+      {/* Metrics */}
+      <div className="space-y-3">
 
-                            <div className="flex justify-between items-center">
+        {metrics.map((metric) => {
 
-                                <div>
-                                    <p className="text-gray-400">
-                                        {metric.label}
-                                    </p>
+          const difference =
+            metric.current - metric.previous;
 
-                                    <p className="text-xl font-bold mt-1">
-                                        {metric.current.toFixed(
-                                            metric.decimals
-                                        )}
-                                        {metric.suffix}
-                                    </p>
-                                </div>
+          const percentageChange =
+            metric.previous === 0
+              ? null
+              : (difference / metric.previous) * 100;
 
-                                <div className="text-right">
+          const improved = difference > 0;
+          const declined = difference < 0;
 
-                                    <p className="text-gray-500 text-sm">
-                                        Previous:{" "}
-                                        {metric.previous.toFixed(
-                                            metric.decimals
-                                        )}
-                                        {metric.suffix}
-                                    </p>
+          let statusColor = "text-[var(--pk-text-muted)]";
+          let statusBackground = "bg-[var(--pk-surface-soft)]";
+          let StatusIcon = Minus;
 
-                                    <p
-                                        className={
-                                            improved
-                                                ? "text-green-400 font-semibold"
-                                                : declined
-                                                    ? "text-red-400 font-semibold"
-                                                    : "text-gray-400 font-semibold"
-                                        }
-                                    >
-                                        {percentageChange === null
-                                            ? "No previous data"
-                                            : `${improved ? "↑" : declined ? "↓" : "→"} ${Math.abs(
-                                                percentageChange
-                                            ).toFixed(1)}%`}
-                                    </p>
+          if (improved) {
+            statusColor = "text-emerald-400";
+            statusBackground = "bg-emerald-400/10";
+            StatusIcon = ArrowUp;
+          }
 
-                                </div>
+          if (declined) {
+            statusColor = "text-rose-400";
+            statusBackground = "bg-rose-400/10";
+            StatusIcon = ArrowDown;
+          }
 
-                            </div>
+          return (
+            <div
+              key={metric.label}
+              className="rounded-2xl border border-[var(--pk-border)] bg-[var(--pk-surface-soft)] p-4 transition-all duration-200 hover:border-[var(--pk-primary)]/30"
+            >
 
-                        </div>
-                    );
-                })}
+              <div className="flex items-center justify-between gap-4">
+
+                {/* Current */}
+                <div className="min-w-0">
+
+                  <p className="text-xs font-medium text-[var(--pk-text-muted)]">
+                    {metric.label}
+                  </p>
+
+                  <p className="mt-1 text-xl font-bold">
+                    {metric.current.toFixed(metric.decimals)}
+                    {metric.suffix}
+                  </p>
+
+                </div>
+
+
+                {/* Previous + Change */}
+                <div className="flex items-center gap-3">
+
+                  <div className="hidden text-right sm:block">
+
+                    <p className="text-[11px] text-[var(--pk-text-muted)]">
+                      Previous
+                    </p>
+
+                    <p className="mt-1 text-sm font-medium">
+                      {metric.previous.toFixed(
+                        metric.decimals
+                      )}
+                      {metric.suffix}
+                    </p>
+
+                  </div>
+
+
+                  <div
+                    className={`flex items-center gap-1.5 rounded-xl px-3 py-2 ${statusBackground} ${statusColor}`}
+                  >
+
+                    <StatusIcon size={15} />
+
+                    <span className="text-xs font-semibold">
+
+                      {percentageChange === null
+                        ? "No data"
+                        : `${Math.abs(
+                            percentageChange
+                          ).toFixed(1)}%`}
+
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </div>
 
             </div>
+          );
+        })}
 
-        </div>
-    );
+      </div>
+
+    </div>
+  );
 }
 
 export default WeeklyComparison;

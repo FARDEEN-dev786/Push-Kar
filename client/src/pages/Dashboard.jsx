@@ -18,20 +18,10 @@ function Dashboard() {
   return (
     <div className="min-h-screen bg-[var(--pk-background)] text-[var(--pk-text)]">
 
-      <Navbar />
+      <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-
-        {/* Page Header */}
-        <div className="mb-6">
-          <h1 className="text-3xl font-bold">
-            Dashboard
-          </h1>
-
-          <p className="text-[var(--pk-text-muted)] mt-1">
-            Your daily performance at a glance.
-          </p>
-        </div>
+        {/* Navbar / Page Header */}
+        <Navbar />
 
         {/* Main Dashboard Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -39,7 +29,6 @@ function Dashboard() {
           {/* LEFT COLUMN */}
           <div className="lg:col-span-2 space-y-6">
 
-            {/* Performance Score */}
             <ScoreCard
               score={performanceData.score}
               change="Calculated from today's check-in"
@@ -68,10 +57,8 @@ function Dashboard() {
 
             </div>
 
-            {/* Tasks */}
             <TaskList />
 
-            {/* Weekly Performance */}
             <WeeklyChart />
 
           </div>
@@ -79,13 +66,10 @@ function Dashboard() {
           {/* RIGHT COLUMN */}
           <div className="space-y-6">
 
-            {/* AI Insight */}
             <AIInsightCard />
 
-            {/* Today's Summary */}
             <TodaySummary />
 
-            {/* Goal Progress */}
             <GoalComparison />
 
           </div>

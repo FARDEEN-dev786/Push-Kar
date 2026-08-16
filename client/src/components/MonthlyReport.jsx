@@ -1,4 +1,5 @@
 import { getPerformanceHistory } from "../utils/historyStorage";
+import { CalendarRange, Trophy } from "lucide-react";
 
 function MonthlyReport() {
   const history = getPerformanceHistory();
@@ -7,16 +8,20 @@ function MonthlyReport() {
 
   if (!month.length) {
     return (
-      <div className="bg-slate-800 rounded-2xl p-6 border border-slate-700">
-        No monthly data available.
+      <div className="rounded-3xl border border-[var(--pk-border)] bg-[var(--pk-surface)] p-6">
+        <p className="text-sm text-[var(--pk-text-muted)]">
+          No monthly data available.
+        </p>
       </div>
     );
   }
 
   const average = (key) =>
     (
-      month.reduce((sum, day) => sum + Number(day[key] || 0), 0) /
-      month.length
+      month.reduce(
+        (sum, day) => sum + Number(day[key] || 0),
+        0
+      ) / month.length
     ).toFixed(1);
 
   const totalStudy = month.reduce(
@@ -33,24 +38,76 @@ function MonthlyReport() {
   );
 
   return (
-    <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6 ">
-      <h2 className="text-2xl font-bold mb-6">
-        📅 Monthly Report
-      </h2>
+    <div className="rounded-3xl border border-[var(--pk-border)] bg-[var(--pk-surface)] p-6 shadow-lg">
 
-      <div className="grid md:grid-cols-2 gap-4">
+      {/* Header */}
+      <div className="mb-6 flex items-center justify-between">
 
-        <Card title="Average Score" value={average("score")} />
+        <div className="flex items-center gap-3">
 
-        <Card title="Average Sleep" value={`${average("sleep")} hrs`} />
+          <div className="rounded-xl bg-[var(--pk-secondary)]/10 p-2.5 text-[var(--pk-secondary)]">
+            <CalendarRange size={21} />
+          </div>
 
-        <Card title="Average Mood" value={`${average("mood")}/10`} />
+          <div>
+            <h2 className="text-xl font-bold">
+              Monthly Report
+            </h2>
 
-        <Card title="Study Hours" value={`${totalStudy} hrs`} />
+            <p className="mt-1 text-xs text-[var(--pk-text-muted)]">
+              Your performance across the last 30 days
+            </p>
+          </div>
 
-        <Card title="Exercise Days" value={exerciseDays} />
+        </div>
 
-        <Card title="Best Score" value={bestDay.score} />
+        <div className="hidden items-center gap-1.5 rounded-full bg-[var(--pk-surface-soft)] px-3 py-1.5 text-xs font-medium text-[var(--pk-text-muted)] sm:flex">
+          {month.length} days
+        </div>
+
+      </div>
+
+
+      {/* Metrics */}
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+
+        <Card
+          title="Average Score"
+          value={average("score")}
+          suffix="/100"
+          highlight
+        />
+
+        <Card
+          title="Best Score"
+          value={bestDay.score}
+          icon={<Trophy size={16} />}
+          highlight
+        />
+
+        <Card
+          title="Average Sleep"
+          value={average("sleep")}
+          suffix=" hrs"
+        />
+
+        <Card
+          title="Average Mood"
+          value={average("mood")}
+          suffix="/10"
+        />
+
+        <Card
+          title="Study Hours"
+          value={totalStudy}
+          suffix=" hrs"
+        />
+
+        <Card
+          title="Exercise Days"
+          value={exerciseDays}
+          suffix=" days"
+        />
 
       </div>
 
@@ -58,11 +115,54 @@ function MonthlyReport() {
   );
 }
 
-function Card({ title, value }) {
+
+function Card({
+  title,
+  value,
+  suffix = "",
+  icon,
+  highlight = false,
+}) {
   return (
-    <div className="bg-slate-900 rounded-xl p-4">
-      <p className="text-gray-400">{title}</p>
-      <p className="text-xl font-bold mt-2">{value}</p>
+    <div
+      className={`rounded-2xl border p-4 transition-all duration-200 ${
+        highlight
+          ? "border-[var(--pk-secondary)]/20 bg-[var(--pk-secondary)]/5"
+          : "border-[var(--pk-border)] bg-[var(--pk-surface-soft)]"
+      }`}
+    >
+
+      <div className="flex items-start justify-between">
+
+        <div>
+
+          <p className="text-xs font-medium text-[var(--pk-text-muted)]">
+            {title}
+          </p>
+
+          <p
+            className={`mt-2 text-xl font-bold ${
+              highlight
+                ? "text-[var(--pk-secondary)]"
+                : ""
+            }`}
+          >
+            {value}
+            <span className="ml-1 text-xs font-medium text-[var(--pk-text-muted)]">
+              {suffix}
+            </span>
+          </p>
+
+        </div>
+
+        {icon && (
+          <div className="text-[var(--pk-secondary)]">
+            {icon}
+          </div>
+        )}
+
+      </div>
+
     </div>
   );
 }
