@@ -1,6 +1,6 @@
 # 🗺️ Push-Kar Development Roadmap
 
-> Last Updated: 15 August 2026
+> Last Updated: 16 August 2026
 
 ---
 
@@ -76,7 +76,7 @@
 
 ### Advanced Analytics
 
-- ⬜ Current Week vs Previous Week
+- ✔ Current Week vs Previous Week Comparison
 - ⬜ Better Monthly Trends
 - ⬜ Best/Worst Habit Analysis
 - ⬜ More Meaningful Correlations
@@ -108,12 +108,26 @@ No complex ML system for v1.
 
 ---
 
-# Version 0.5
+# Version 0.5 🚧
 ## UI / UX Overhaul
 
-**Status: PLANNED**
+**Status: IN PROGRESS**
 
-- ⬜ Modern Push-Kar design
+### Completed
+
+- ✔ Push-Kar CSS design system
+- ✔ Dark theme
+- ✔ Bright theme
+- ✔ Orange theme
+- ✔ Pink theme
+- ✔ Appearance settings page
+- ✔ Theme-aware Sidebar
+- ✔ CSS variable-based theme tokens
+- ✔ Smooth theme transitions
+
+### Remaining
+
+- ✔ Modern Push-Kar design foundation
 - ⬜ Better dashboard
 - ⬜ Improved cards
 - ⬜ Better typography
@@ -276,13 +290,13 @@ v0.2 Dynamic System
 ██████████ 100%
 
 v0.3 Analytics
-████████░░ ~80%
+█████████░ ~90%
 
 v0.4 Intelligence
-██░░░░░░░░ Planned
+░░░░░░░░░░ Planned
 
 v0.5 UI/UX
-░░░░░░░░░░ Planned
+████░░░░░░ ~40%
 
 v0.6 Refactor
 ░░░░░░░░░░ Planned
@@ -307,20 +321,21 @@ v1.0 Release
 # 🧭 Immediate Next Steps
 
 1. History refactor
-2. One check-in per day
-3. Verify streak system
-4. Week vs previous-week comparison
-5. Refine monthly analytics
-6. Fix Exercise goal handling
-7. AI Coach
-8. Simple prediction
-9. UI overhaul
-10. Frontend refactor
-11. Backend
-12. Database
-13. Authentication
-14. Testing
-15. Deployment
+2. One check-in per calendar day
+3. Prevent duplicate daily entries
+4. Improve date handling
+5. Verify and improve streak accuracy
+6. Refine monthly analytics
+7. Fix Exercise goal handling
+8. Build focused AI Coach
+9. Add simple prediction
+10. Finish UI/UX overhaul
+11. Frontend refactor
+12. Backend
+13. Database
+14. Authentication
+15. Testing
+16. Deployment
 
 ---
 

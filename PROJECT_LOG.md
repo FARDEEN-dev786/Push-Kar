@@ -1,6 +1,6 @@
 # 🚀 Push-Kar Project Log
 
-> Last Updated: 15 August 2026
+> Last Updated: 16 August 2026
 
 ---
 
@@ -145,6 +145,7 @@ Completed:
 - Goals
 - Settings
 - Sidebar navigation
+- Theme-aware Sidebar styling
 
 ---
 
@@ -302,6 +303,55 @@ Completed:
 - Personalized rule-based insight
 - Insufficient-data fallback
 
+## Weekly Comparison
+
+- Current week vs previous week
+- Average score comparison
+- Sleep comparison
+- Mood comparison
+- Energy comparison
+- Water comparison
+- Study comparison
+- Focus comparison
+- Exercise-day comparison
+- Percentage change indicators
+- Improved / declined / unchanged states
+
+
+---
+
+# 🎨 Theme & Appearance System
+
+Completed:
+
+- CSS variable-based Push-Kar design system
+- Dark theme
+- Bright theme
+- Orange theme
+- Pink theme
+- Appearance settings page
+- Theme switching
+- Theme-aware Sidebar
+- Theme-aware colors using `--pk-*` variables
+- Smooth theme transitions
+
+Current design tokens include:
+
+- Background
+- Surface
+- Soft surface
+- Border
+- Text
+- Muted text
+- Primary
+- Secondary
+- Success
+- Warning
+- Danger
+- Glow
+
+The Sidebar already consumes the theme variables, so it automatically adapts when the theme changes.
+
 ---
 
 # 🔮 Future Intelligence
@@ -320,21 +370,30 @@ The prediction feature will be rule-based rather than a complex machine-learning
 
 # 🎨 UI Status
 
-The application is functional but the UI is still considered an early version.
+The application now has a functioning multi-theme visual system, but the complete UI/UX overhaul is not finished.
 
-A dedicated UI/UX overhaul is planned after the core functionality is stable.
+### Completed
 
-Planned:
+- Push-Kar design tokens
+- Four visual themes
+- Appearance selector
+- Theme-aware Sidebar
+- Theme transitions
+- Improved visual consistency
 
-- Better visual hierarchy
+### Remaining
+
+- Better dashboard refinement
 - Better cards
 - Improved typography
 - Better spacing
 - Improved charts
+- Empty states
+- Loading states
 - Animations
 - Mobile responsiveness
-- Better empty/loading states
-- Stronger Push-Kar branding
+- Accessibility improvements
+- Reusable UI components
 
 ---
 
@@ -342,9 +401,9 @@ Planned:
 
 **Version:** v0.3.x
 
-**Phase:** Frontend Analytics & Intelligence
+**Phase:** Frontend Analytics & UI Foundation
 
-**Status:** Core frontend functionality substantially complete.
+**Status:** Core frontend functionality substantially complete. Analytics has advanced significantly, and the theme/appearance system is now functional.
 
 ---
 
@@ -353,7 +412,6 @@ Planned:
 1. Refactor history storage.
 2. Ensure one check-in per calendar day.
 3. Improve streak accuracy.
-4. Add current-week vs previous-week comparison.
 5. Refine monthly analytics.
 6. Improve Exercise goal handling.
 7. Build focused AI Coach.
