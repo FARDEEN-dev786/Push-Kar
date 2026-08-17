@@ -1,5 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getGoals, saveGoals } from "../utils/goalsStorage";
+import { compareGoals } from "../utils/goalComparison";
+import { PerformanceContext } from "../context/PerformanceContext";
+
 import {
   Target,
   Plus,
@@ -45,43 +48,56 @@ function Goals() {
   const [goalType, setGoalType] = useState("study");
   const [target, setTarget] = useState("");
 
+  const { performanceData } = useContext(PerformanceContext);
+
   useEffect(() => {
     setGoals(getGoals());
   }, []);
 
-  useEffect(() => {
-    saveGoals(goals);
-  }, [goals]);
+
 
   const addGoal = () => {
-    if (!target) return;
+    if (!target || Number(target) <= 0) return;
 
-    setGoals([
-      ...goals,
-      {
-        id: Date.now(),
-        type: goalType,
-        target: Number(target),
-        completed: false,
-      },
-    ]);
+    const newGoal = {
+      id: Date.now(),
+      type: goalType,
+      target: Number(target),
+      completed: false,
+    };
+
+    const updatedGoals = [...goals, newGoal];
+
+    setGoals(updatedGoals);
+    saveGoals(updatedGoals);
 
     setTarget("");
   };
 
   const toggleGoal = (id) => {
-    setGoals(
-      goals.map((goal) =>
-        goal.id === id
-          ? { ...goal, completed: !goal.completed }
-          : goal
-      )
+    const updatedGoals = goals.map((goal) =>
+      goal.id === id
+        ? { ...goal, completed: !goal.completed }
+        : goal
     );
+
+    setGoals(updatedGoals);
+    saveGoals(updatedGoals);
   };
 
   const deleteGoal = (id) => {
-    setGoals(goals.filter((goal) => goal.id !== id));
+    const updatedGoals = goals.filter(
+      (goal) => goal.id !== id
+    );
+
+    setGoals(updatedGoals);
+    saveGoals(updatedGoals);
   };
+
+  const comparison = compareGoals(
+    goals,
+    performanceData
+  );
 
   const completedGoals = goals.filter(
     (goal) => goal.completed
@@ -117,7 +133,7 @@ function Goals() {
             <div className="rounded-2xl border border-[var(--pk-border)] bg-[var(--pk-surface)] px-4 py-3">
 
               <p className="text-xs text-[var(--pk-text-muted)]">
-                Progress
+                Manual Progress
               </p>
 
               <p className="mt-1 font-bold">
@@ -151,24 +167,20 @@ function Goals() {
         <div className="grid gap-3 sm:grid-cols-[1fr_1fr_auto]">
 
           {/* Goal Type */}
-          <div className="relative">
-
-            <select
-              value={goalType}
-              onChange={(e) => setGoalType(e.target.value)}
-              className="w-full appearance-none rounded-2xl border border-[var(--pk-border)] bg-[var(--pk-surface-soft)] p-3.5 text-sm outline-none transition focus:border-[var(--pk-primary)]"
-            >
-              {goalOptions.map((option) => (
-                <option
-                  key={option.value}
-                  value={option.value}
-                >
-                  {option.label}
-                </option>
-              ))}
-            </select>
-
-          </div>
+          <select
+            value={goalType}
+            onChange={(e) => setGoalType(e.target.value)}
+            className="w-full appearance-none rounded-2xl border border-[var(--pk-border)] bg-[var(--pk-surface-soft)] p-3.5 text-sm outline-none transition focus:border-[var(--pk-primary)]"
+          >
+            {goalOptions.map((option) => (
+              <option
+                key={option.value}
+                value={option.value}
+              >
+                {option.label}
+              </option>
+            ))}
+          </select>
 
 
           {/* Target */}
@@ -220,7 +232,7 @@ function Goals() {
 
         <div className="space-y-3">
 
-          {goals.map((goal) => {
+          {comparison.map((goal) => {
 
             const option = goalOptions.find(
               (item) => item.value === goal.type
@@ -228,86 +240,141 @@ function Goals() {
 
             const Icon = option?.icon || Target;
 
+            const isSuccess = goal.status === "success";
+            const isWarning = goal.status === "warning";
+
+            const progressColor = isSuccess
+              ? "bg-emerald-400"
+              : isWarning
+                ? "bg-amber-400"
+                : "bg-[var(--pk-primary)]";
+
             return (
               <div
                 key={goal.id}
-                className={`flex items-center gap-4 rounded-2xl border p-4 transition-all duration-200 ${
-                  goal.completed
-                    ? "border-emerald-400/20 bg-emerald-400/5"
-                    : "border-[var(--pk-border)] bg-[var(--pk-surface)] hover:border-[var(--pk-primary)]/30"
-                }`}
+                className={`rounded-2xl border p-4 transition-all duration-200 ${goal.completed
+                  ? "border-emerald-400/20 bg-emerald-400/5"
+                  : "border-[var(--pk-border)] bg-[var(--pk-surface)] hover:border-[var(--pk-primary)]/30"
+                  }`}
               >
 
-                {/* Checkbox */}
-                <button
-                  onClick={() => toggleGoal(goal.id)}
-                  aria-label="Toggle goal"
-                  className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border transition ${
-                    goal.completed
+                <div className="flex items-center gap-4">
+
+                  {/* Checkbox */}
+                  <button
+                    onClick={() => toggleGoal(goal.id)}
+                    aria-label="Toggle goal"
+                    className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border transition ${goal.completed
                       ? "border-emerald-400 bg-emerald-400 text-white"
                       : "border-[var(--pk-border)] bg-[var(--pk-surface-soft)] text-transparent hover:border-[var(--pk-primary)]"
-                  }`}
-                >
-                  <Check size={18} />
-                </button>
+                      }`}
+                  >
+                    <Check size={18} />
+                  </button>
 
 
-                {/* Icon */}
-                <div
-                  className={`hidden h-10 w-10 shrink-0 items-center justify-center rounded-xl sm:flex ${
-                    goal.completed
+                  {/* Icon */}
+                  <div
+                    className={`hidden h-10 w-10 shrink-0 items-center justify-center rounded-xl sm:flex ${goal.completed
                       ? "bg-emerald-400/10 text-emerald-400"
                       : "bg-[var(--pk-primary)]/10 text-[var(--pk-primary)]"
-                  }`}
-                >
-                  <Icon size={19} />
-                </div>
+                      }`}
+                  >
+                    <Icon size={19} />
+                  </div>
 
 
-                {/* Goal Info */}
-                <div className="min-w-0 flex-1">
+                  {/* Goal Info */}
+                  <div className="min-w-0 flex-1">
 
-                  <p
-                    className={`font-semibold ${
-                      goal.completed
+                    <p
+                      className={`font-semibold ${goal.completed
                         ? "text-[var(--pk-text-muted)] line-through"
                         : ""
-                    }`}
+                        }`}
+                    >
+                      {option?.label || goal.type}
+                    </p>
+
+                    <p className="mt-1 text-xs text-[var(--pk-text-muted)]">
+                      Target: {goal.type === "exercise"
+                        ? "Complete exercise"
+                        : goal.target}
+                    </p>
+
+                  </div>
+
+
+                  {/* Today's progress */}
+                  <div className="hidden text-right sm:block">
+
+                    <p className="text-xs text-[var(--pk-text-muted)]">
+                      Today
+                    </p>
+
+                    <p className="mt-1 text-sm font-bold">
+                      {goal.type === "exercise"
+                        ? goal.actual
+                          ? "Done"
+                          : "Not done"
+                        : `${goal.actual} / ${goal.target}`}
+                    </p>
+
+                  </div>
+
+
+                  {/* Percentage */}
+                  <div className="min-w-[55px] text-right">
+
+                    <p className="text-sm font-bold">
+                      {goal.progress}%
+                    </p>
+
+                    <p className="text-[10px] text-[var(--pk-text-muted)]">
+                      progress
+                    </p>
+
+                  </div>
+
+
+                  {/* Delete */}
+                  <button
+                    onClick={() => deleteGoal(goal.id)}
+                    aria-label="Delete goal"
+                    className="rounded-xl p-2 text-[var(--pk-text-muted)] transition hover:bg-rose-400/10 hover:text-rose-400"
                   >
-                    {option?.label || goal.type}
-                  </p>
-
-                  <p className="mt-1 text-xs text-[var(--pk-text-muted)]">
-                    Target: {goal.target}
-                  </p>
+                    <Trash2 size={18} />
+                  </button>
 
                 </div>
 
 
-                {/* Status */}
-                <div className="hidden sm:block">
+                {/* Progress Bar */}
+                <div className="ml-14 mt-4">
 
-                  {goal.completed ? (
-                    <span className="rounded-full bg-emerald-400/10 px-3 py-1.5 text-xs font-semibold text-emerald-400">
-                      Completed
-                    </span>
-                  ) : (
-                    <span className="rounded-full bg-[var(--pk-primary)]/10 px-3 py-1.5 text-xs font-semibold text-[var(--pk-primary)]">
-                      In progress
-                    </span>
-                  )}
+                  <div className="h-2 overflow-hidden rounded-full bg-[var(--pk-background)]">
+
+                    <div
+                      className={`h-full rounded-full transition-all duration-500 ${progressColor}`}
+                      style={{
+                        width: `${goal.progress}%`,
+                      }}
+                    />
+
+                  </div>
+
+                  <p
+                    className={`mt-2 text-xs ${isSuccess
+                      ? "text-emerald-400"
+                      : isWarning
+                        ? "text-amber-400"
+                        : "text-[var(--pk-text-muted)]"
+                      }`}
+                  >
+                    {goal.message}
+                  </p>
 
                 </div>
-
-
-                {/* Delete */}
-                <button
-                  onClick={() => deleteGoal(goal.id)}
-                  aria-label="Delete goal"
-                  className="rounded-xl p-2 text-[var(--pk-text-muted)] transition hover:bg-rose-400/10 hover:text-rose-400"
-                >
-                  <Trash2 size={18} />
-                </button>
 
               </div>
             );

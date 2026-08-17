@@ -46,7 +46,7 @@ function Sidebar() {
         </h1>
 
         <p className="mt-1 text-sm text-[var(--pk-text-muted)]">
-          Your AI Performance Coach
+          Your AI Productivity Coach
         </p>
       </div>
 
